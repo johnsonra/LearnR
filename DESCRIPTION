@@ -1,0 +1,15 @@
+Package: LearnR
+Title: Auto-check exercises for asynchronous learning
+Version: 1.0
+Authors@R: c(person('Randy', 'Johnson', email = 'johnsonra@mail.nih.gov',
+                    role = c('cre', 'aut')))
+Description: Utility package for automatic evaluation of exercises submitted as part of asychronous tutorials.
+License: MIT + file LICENSE
+Depends: R (>= 4.1)
+Encoding: UTF-8
+URL: https://github.com/johnsonra/LearnR
+Suggests:
+    rmarkdown,
+    knitr
+Language: en-US
+RoxygenNote: 7.2.1
