@@ -5,12 +5,13 @@ Authors@R: c(person('Randy', 'Johnson', email = 'johnsonra@mail.nih.gov',
                     role = c('cre', 'aut')))
 Description: Utility package for automatic evaluation of exercises submitted as part of asychronous tutorials.
 License: MIT + file LICENSE
-Depends: R (>= 4.1)
+Depends: R (>= 4.1), tm
 Encoding: UTF-8
 URL: https://github.com/johnsonra/LearnR
 Imports:
     magrittr,
     rscc,
+    stats,
     utils
 Suggests:
     rmarkdown,
