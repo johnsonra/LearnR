@@ -94,7 +94,10 @@ compare_source_code <- function(f1, f2)
 #' @param f1 Vector of paths to files containing code chunks from solution 1 (e.g. student submissions)
 #' @param f2 Vector of paths to files containing code chunks from solution 2 (e.g. example solutions)
 #'
-#' @return A vector of distance measures (between 0 and 1) for each pair of files in the list.
+#' @return A vector of distances for each pair of files in the list.
+#'
+#' @details Provided a sufficient sample of distances from other students, the results of this function can
+#' be used to estimate the percentile of the provided answer compared to answers provided by other students.
 #'
 #' @references http://fredgibbs.net/tutorials/document-similarity-with-r.html
 #'
