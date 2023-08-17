@@ -50,6 +50,7 @@ compare_source_code <- function(f1, f2)
         },
         warning = function(w){
           # a warning will be thrown if there isn't anything to compare - return NA
+          # there is also a warning if no names are found (e.g. it has a hard time with `x[c(2,3,4)]`)
           return(data.frame(row = 'f1', col = 'f2', jaccard = NA))
         }))$jaccard
     ))
@@ -64,6 +65,7 @@ compare_source_code <- function(f1, f2)
       },
       warning = function(w){
         # a warning will be thrown if there isn't anything to compare - return NA
+        # there is also a warning if no names are found (e.g. it has a hard time with `x[c(2,3,4)]`)
         return(data.frame(row = 'f1', col = 'f2', jaccard = NA))
       }))$jaccard
     ))
@@ -78,11 +80,14 @@ compare_source_code <- function(f1, f2)
       },
       warning = function(w){
         # a warning will be thrown if there isn't anything to compare - return NA
+        # there is also a warning if no names are found (e.g. it has a hard time with `x[c(2,3,4)]`)
         return(data.frame(row = 'f1', col = 'f2', jaccard = NA))
       }))$jaccard
     ))
 
-    retval[i] <- mean(c(vars, funs, nms), na.rm = TRUE)
+    retval[i] <- ifelse(is.na(vars) & is.na(funs) & is.na(nms),
+                        1, # this happens for super simple code - just give them a pass for now??
+                        mean(c(vars, funs, nms), na.rm = TRUE))
   }
 
   return(retval)
@@ -143,7 +148,7 @@ compare_text <- function(f1, f2)
       paste(collapse = '|')
 
     invisible(capture.output({
-      retval[i] <-
+      tmp <-
         # set up corpus
         tm::DirSource(directory = corp_dirs,
                       pattern = files_to_pick) %>%
@@ -163,6 +168,15 @@ compare_text <- function(f1, f2)
         # cluster terms
         dist(method = 'euclidean')
     }))
+    
+    # tmp will be NA if there is a single letter answer (like pick one of the following with an answer of "D")
+    # compare files directly if that is the case (either they are identical or they aren't)
+    if(is.na(tmp))
+    {
+        retval[i] <- readLines(f1) == readLines(f2)
+    }else{
+        retval[i] <- tmp
+    }
   }
 
   return(retval)

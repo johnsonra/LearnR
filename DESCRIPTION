@@ -1,6 +1,6 @@
 Package: LearnR
 Title: Auto-check exercises for asynchronous learning
-Version: 1.0-1
+Version: 1.0-2
 Authors@R: c(person('Randy', 'Johnson', email = 'johnsonra@mail.nih.gov',
                     role = c('cre', 'aut')))
 Description: Utility package for automatic evaluation of exercises submitted as part of asychronous tutorials.
